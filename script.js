@@ -31,10 +31,6 @@ function startTimer() {
 	
 	interval = setInterval(function() {
 		
-		if (secTime < 10) {
-			secTime = "0" + secTime;
-		}
-		
 		if (minTime <= 0 && secTime <= 0) {
 			
 			timer.textContent = "Time's Up";
@@ -51,6 +47,10 @@ function startTimer() {
 		
 			timer.textContent = minTime + " Minutes " + secTime + " Second(s) Left";
 			secTime -= 1;
+			
+			if (secTime < 10) {
+				secTime = "0" + secTime;
+			}
 		
 		}
 		
