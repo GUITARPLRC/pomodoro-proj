@@ -17,8 +17,8 @@ reset.addEventListener("click", resetTimer, false);
 minutes.value = 5;
 seconds.value = 0;
 
-minTime = minutes.value;
-secTime = seconds.value;
+minTime = Number(minutes.value);
+secTime = Number(seconds.value);
 
 timer.textContent = minTime + " Minutes " + secTime + " Second(s) Left";
 
@@ -26,6 +26,9 @@ function startTimer() {
 	
 	start.disabled = true;
 	pause.disabled = false;
+	
+	minTime = Number(minutes.value);
+	secTime = Number(seconds.value);
 	
 	interval = setInterval(function() {
 		
@@ -37,7 +40,7 @@ function startTimer() {
 			
 		}	else {
 			
-			if (secTime === 0 && minTime > 0) {
+			if (secTime < 0 && minTime > 0) {
 				
 				minTime -= 1;
 				secTime = 59;
@@ -45,6 +48,7 @@ function startTimer() {
 			}
 		
 			timer.textContent = minTime + " Minutes " + secTime + " Second(s) Left";
+			secTime -= 1;
 		
 		}
 		
@@ -66,12 +70,11 @@ function resetTimer() {
 	start.disabled = false;
 	pause.disabled = true;
 	
-	minutes.value = 5;
-	seconds.value = 0;
-	
-	minTime = minutes.value;
-	secTime = seconds.value;
+	minTime = Number(minutes.value);
+	secTime = Number(seconds.value);
 	
 	timer.textContent = minTime + " Minutes " + secTime + " Second(s) Left";
+	
+	clearInterval(interval);
 	
 }
