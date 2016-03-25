@@ -1,10 +1,9 @@
 var start = document.getElementById("start"); // start button
 var pause = document.getElementById("pause"); // pause button
-var reset = document.getElementById("reset"); // reset button
+var setTime = document.getElementById("setTime"); // setTime button
 var timer = document.getElementById("timer"); // html timer display
 var minutes = document.getElementById("minutes"); // minutes user input
 var seconds = document.getElementById("seconds"); // seconds user input
-var time = 5; // set time for timer
 var interval; // interval for timer
 var minTime;
 var secTime;
@@ -12,7 +11,7 @@ var secTime;
 pause.disabled = true;
 start.addEventListener("click", startTimer, false);
 pause.addEventListener("click", pauseTimer, false);
-reset.addEventListener("click", resetTimer, false);
+setTime.addEventListener("click", setTimeTimer, false);
 
 minutes.value = 5;
 seconds.value = 0;
@@ -32,10 +31,13 @@ function startTimer() {
 	
 	interval = setInterval(function() {
 		
+		if (secTime < 10) {
+			secTime = "0" + secTime;
+		}
 		
-		if (minutes <= 0 && seconds <= 0) {
+		if (minTime <= 0 && secTime <= 0) {
 			
-			timer.textContent = minTime + " Minutes " + secTime + " Second(s) Left";
+			timer.textContent = "Time's Up";
 			clearInterval(interval);
 			
 		}	else {
@@ -65,7 +67,7 @@ function pauseTimer() {
 	
 }
 
-function resetTimer() {
+function setTimeTimer() {
 	
 	start.disabled = false;
 	pause.disabled = true;
