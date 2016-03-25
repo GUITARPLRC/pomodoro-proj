@@ -38,7 +38,7 @@ function startTimer() {
 			
 		}	else {
 			
-			if (secTime < 0 && minTime > 0) {
+			if (secTime <= 0 && minTime > 0) {
 				
 				minTime -= 1;
 				secTime = 59;
@@ -49,7 +49,9 @@ function startTimer() {
 			secTime -= 1;
 			
 			if (secTime < 10) {
+				
 				secTime = "0" + secTime;
+				
 			}
 		
 		}
