@@ -13,11 +13,18 @@ start.addEventListener("click", startTimer, false);
 pause.addEventListener("click", pauseTimer, false);
 setTime.addEventListener("click", setTimeTimer, false);
 
-minutes.value = 5;
-seconds.value = 0;
-
+minutes.value = 20; // default time set
+seconds.value = 0; // default time set
+// get user input and set time for timer
 minTime = Number(minutes.value);
 secTime = Number(seconds.value);
+
+if (secTime < 10) {
+	
+	// add 0 in front of seconds when below 10
+	secTime = "0" + secTime;
+	
+}
 
 timer.textContent = minTime + " Minutes " + secTime + " Second(s) Left";
 
@@ -26,30 +33,28 @@ function startTimer() {
 	start.disabled = true;
 	pause.disabled = false;
 	
-	minTime = Number(minutes.value);
-	secTime = Number(seconds.value);
-	
 	interval = setInterval(function() {
 		
 		if (minTime <= 0 && secTime <= 0) {
-			
+			// when timer has reached 0
 			timer.textContent = "Time's Up";
 			clearInterval(interval);
 			
 		}	else {
 			
 			if (secTime <= 0 && minTime > 0) {
-				
+				// subtract 1 minute when seconds reach 0
 				minTime -= 1;
 				secTime = 59;
 				
 			}
 		
 			timer.textContent = minTime + " Minutes " + secTime + " Second(s) Left";
-			secTime -= 1;
+			secTime -= 1; // subtract 1 second each interval
 			
 			if (secTime < 10) {
 				
+				// add 0 in front of seconds when below 10
 				secTime = "0" + secTime;
 				
 			}
@@ -76,6 +81,13 @@ function setTimeTimer() {
 	
 	minTime = Number(minutes.value);
 	secTime = Number(seconds.value);
+	
+	if (secTime < 10) {
+		
+		// add 0 in front of seconds when below 10
+		secTime = "0" + secTime;
+		
+	}
 	
 	timer.textContent = minTime + " Minutes " + secTime + " Second(s) Left";
 	
