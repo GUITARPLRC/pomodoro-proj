@@ -5,20 +5,25 @@
 	font-family:Arial, Helvetica, sans-serif;
 }
 
+body {
+	background:linear-gradient(to bottom right, #1abc9c, #2980b9) fixed;
+}
+
 h1 {
 	margin-bottom:30px;
 }
 
 #minutes {
-	width:20px;
-}
-
-#seconds {
-	width:20px;
+	width:36px;
+	font-size:30px;
 }
 
 #output {
 	margin:20px 0;
+	font-size:36px;
+}
+#timer {
+	font-sizE:40px;
 }
 
 #start {
@@ -27,6 +32,7 @@ h1 {
 
 #pause{
 	padding:5px 10px;
+	margin-left:20px;
 }
 
 #setTime {
