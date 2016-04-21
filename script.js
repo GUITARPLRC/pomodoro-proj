@@ -3,9 +3,11 @@ var pause = document.getElementById("pause"); // pause button
 var setTime = document.getElementById("setTime"); // setTime button
 var timer = document.getElementById("timer"); // html timer display
 var minutes = document.getElementById("minutes"); // minutes user input
+var progress  = $("progress");
 var interval; // interval for timer
 var minTime;
 var secTime;
+var total; // total to set progress bar
 
 pause.disabled = true;
 
@@ -27,6 +29,7 @@ if (secTime < 10) {
 }
 
 timer.textContent = minTime + " Minutes " + secTime + " Second(s) Left";
+
 
 function startTimer() {
 	

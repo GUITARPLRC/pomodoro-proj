@@ -19,9 +19,18 @@ h1 {
 }
 
 #output {
-	margin:20px 0;
 	font-size:36px;
 }
+
+#progress {
+	width:200px;
+	height:200px;
+	border-radius:50%;
+	background-color:gray;
+	margin:20px auto;
+}
+
+
 #timer {
 	font-sizE:40px;
 }
