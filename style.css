@@ -28,8 +28,10 @@ h1 {
 	margin:20px auto;
 	border-radius:50%;
 	transform:rotate(-90deg);
-	color:#27ae60;
 	position:relative;
+}
+.ui-widget-header {
+	background:#c0392b;
 }
 
 
@@ -41,6 +43,7 @@ h1 {
 	top:45%;
 	transform:rotate(90deg);
 	color:#000;
+	background-color:rgba(0,0,0,0);
 }
 
 #start {

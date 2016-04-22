@@ -7,30 +7,17 @@ var interval; // interval for timer
 var minTime;
 var secTime = 0;
 var num = 0; // increment progess bar
-var total = 0; // total to set progress bar
-var progress = $("#progress");
-
-pause.disabled = true;
+var total = 0; // total to set progress bar max
 
 start.addEventListener("click", startTimer, false);
 pause.addEventListener("click", pauseTimer, false);
 setTime.addEventListener("click", setTimeTimer, false);
 
+pause.disabled = true;
 minutes.value = 20; // default time set
-
-// get user input and set time for timer
-minTime = Number(minutes.value);
-
-if (secTime < 10) {
-	
-	// add 0 in front of seconds when below 10
-	secTime = "0" + secTime;
-	
-}
-
-timer.textContent = minTime + " Minute(s) Left";
-
-progress.progressbar({value: 0});
+minTime = Number(minutes.value);  // get user input and set time for timer
+timer.textContent = minTime + " Minute(s) Left"; // display time on screen
+$("#progress").progressbar({value:0});
 
 
 function startTimer() {
@@ -44,7 +31,8 @@ function startTimer() {
 		timer.textContent = minTime + " Minute(s) " + secTime + " Second(s) Left";
 		secTime -= 1; // subtract 1 second each interval
 		
-		progress.progressbar({value: num + 1});
+		num++; // increment progress bar variable
+		$("#progress").progressbar({value: num}); // set progress bar value
 		
 		if (minTime <= 0 && secTime <= 0) {
 			// when timer has reached 0
@@ -57,13 +45,11 @@ function startTimer() {
 				// subtract 1 minute when seconds reach 0
 				minTime -= 1;
 				secTime = 59;
-				
 			}
 			
 			if (secTime < 10) {
 				// add 0 in front of seconds when below 10
 				secTime = "0" + secTime;
-				
 			}
 		
 		}
@@ -84,26 +70,24 @@ function pauseTimer() {
 
 function setTimeTimer() {
 	
-	start.disabled = false;
-	pause.disabled = true;
-	total = 0;
-	$("#progress").progressbar({max: total});
+	if (minutes.value <= 0) {
+		alert("please enter a value greater than zero");
+		
+	} else {
+		
+		start.disabled = false;
+		pause.disabled = true;
+		
+		minTime = Number(minutes.value);
+		secTime = 0;
+		
+		total = minTime * 60 * 1000;
+		num = (1 / (minTime * 60 * 1000));
+		$("#progress").progressbar({max: total});
 	
-	minTime = Number(minutes.value);
-	secTime = 0;
+		timer.textContent = minTime + " Minute(s) Left";
 	
-	total = (minTime * 60 * 1000);
-	progress.progressbar({max: total});
-	
-	if (secTime < 10) {
-				
-		// add 0 in front of seconds when below 10
-		secTime = "0" + secTime;
-				
+		clearInterval(interval);
 	}
-	
-	timer.textContent = minTime + " Minute(s) " + secTime + " Second(s) Left";
-	
-	clearInterval(interval);
 	
 }
