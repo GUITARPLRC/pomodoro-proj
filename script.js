@@ -5,8 +5,10 @@ var timer = document.getElementById("timer"); // html timer display
 var minutes = document.getElementById("minutes"); // minutes user input
 var interval; // interval for timer
 var minTime;
-var secTime;
-var total; // total to set progress bar
+var secTime = 0;
+var num = 0; // increment progess bar
+var total = 0; // total to set progress bar
+var progress = $("#progress");
 
 pause.disabled = true;
 
@@ -18,7 +20,6 @@ minutes.value = 20; // default time set
 
 // get user input and set time for timer
 minTime = Number(minutes.value);
-secTime = 0;
 
 if (secTime < 10) {
 	
@@ -27,18 +28,23 @@ if (secTime < 10) {
 	
 }
 
-timer.textContent = minTime + " Minutes " + secTime + " Second(s) Left";
+timer.textContent = minTime + " Minute(s) Left";
 
-$("#progress").progressbar();
+progress.progressbar({value: 0});
 
 
 function startTimer() {
 	
 	setTime.disabled = true;
 	start.disabled = true;
-	pause.disabled = false;
+	pause.disabled = false;	
 	
 	interval = setInterval(function() {
+		
+		timer.textContent = minTime + " Minute(s) " + secTime + " Second(s) Left";
+		secTime -= 1; // subtract 1 second each interval
+		
+		progress.progressbar({value: num + 1});
 		
 		if (minTime <= 0 && secTime <= 0) {
 			// when timer has reached 0
@@ -53,12 +59,8 @@ function startTimer() {
 				secTime = 59;
 				
 			}
-		
-			timer.textContent = minTime + " Minutes " + secTime + " Second(s) Left";
-			secTime -= 1; // subtract 1 second each interval
 			
 			if (secTime < 10) {
-				
 				// add 0 in front of seconds when below 10
 				secTime = "0" + secTime;
 				
@@ -84,18 +86,23 @@ function setTimeTimer() {
 	
 	start.disabled = false;
 	pause.disabled = true;
+	total = 0;
+	$("#progress").progressbar({max: total});
 	
 	minTime = Number(minutes.value);
 	secTime = 0;
 	
+	total = (minTime * 60 * 1000);
+	progress.progressbar({max: total});
+	
 	if (secTime < 10) {
 				
-				// add 0 in front of seconds when below 10
-				secTime = "0" + secTime;
+		// add 0 in front of seconds when below 10
+		secTime = "0" + secTime;
 				
-			}
+	}
 	
-	timer.textContent = minTime + " Minutes " + secTime + " Second(s) Left";
+	timer.textContent = minTime + " Minute(s) " + secTime + " Second(s) Left";
 	
 	clearInterval(interval);
 	
