@@ -8,7 +8,7 @@ var interval; // interval for timer
 var minTime;
 var secTime = "00";
 var num; // increment progess bar
-var total; // total to set progress bar max
+var total = 0; // total to set progress bar max
 
 start.addEventListener("click", startTimer, false);
 pause.addEventListener("click", pauseTimer, false);
@@ -18,12 +18,11 @@ pause.disabled = true;
 minutes.value = 20; // default time set
 minTime = Number(minutes.value);  // get user input and set time for timer
 timer.textContent = minTime + ":" + secTime; // display time on screen
-total = (minTime * 60) / 100;
-num = total;
 
 
 function startTimer() {
 	
+	num = (1 / (minTime * 60)) * 100;
 	setTime.disabled = true;
 	start.disabled = true;
 	pause.disabled = false;	
@@ -31,8 +30,8 @@ function startTimer() {
 	interval = setInterval(function() {
 		
 		secTime -= 1; // subtract 1 second each interval
-		num += total;
-		progressFill.style.width = num + "%";
+		total += num;
+		progressFill.style.width = total + "%";
 		
 		if (minTime === 0 && secTime === 0) {
 			// when timer has reached 0
@@ -41,7 +40,7 @@ function startTimer() {
 			
 		}	else {
 			
-			if (secTime <= 0 && minTime > 0) {
+			if (secTime < 0 && minTime > 0) {
 				// subtract 1 minute when seconds reach 0
 				minTime -= 1;
 				secTime = 59;
@@ -83,8 +82,6 @@ function setTimeTimer() {
 		
 		minTime = Number(minutes.value);
 		secTime = "00";
-		total = (minTime * 60) / 100;
-		num = total;
 		
 		timer.textContent = minTime + ":" + secTime;
 	
